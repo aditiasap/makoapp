@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createSwitchNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import Welcome from './components/unauthorized/Welcome';
@@ -14,8 +13,7 @@ import Transaksi from './components/authorized/Transaksi';
 import Jual from './components/authorized/Jual';
 import Beli from './components/authorized/Beli';
 
-import Header from './components/common/Header';
-import Listing from './components/common/Listing';
+import Searching from './components/common/Searching';
 
 const AuthStack = createStackNavigator({
 	Welcome: {
@@ -30,8 +28,8 @@ const AuthStack = createStackNavigator({
 			header: null
 		}
 	},
-	ListingOutside: {
-		screen: Listing,
+	Searching: {
+		screen: Searching,
 		navigationOptions: {
 			header: null
 		}
@@ -45,16 +43,16 @@ const AccountStack = createStackNavigator({
 			header: null
 		}
 	},
-	ListingInside: {
-		screen: Listing,
+	Searching: {
+		screen: Searching,
 		navigationOptions: {
 			header: null
 		}
 	}
 });
 
-const tabStack = createMaterialTopTabNavigator({
-	Account: { screen: AccountStack },
+const AppStack = createBottomTabNavigator({
+	Account: { screen: Account },
 	Transaksi: { screen: Transaksi },
 	Jual: { screen: Jual },
 	Beli: { screen: Beli }
@@ -74,38 +72,12 @@ const tabStack = createMaterialTopTabNavigator({
 		},
 	}),
 	tabBarOptions: {
-		activeTintColor: 'rgb(255, 0, 0)',
-		inactiveTintColor: '#AFAFAF',
-		showIcon: true,
-		upperCaseLabel: false,
-		style: {
-			backgroundColor: '#fff',
-			borderWidth: 1,
-			borderColor: '#ddd'
-		},
-		tabStyle: {
-			borderRightWidth: 1,
-			borderColor: '#ddd'
-		},
-		indicatorStyle: {
-			backgroundColor: '#fff'
-		}
-	}
-});
-
-const AppStack = createStackNavigator({
-	Home: {
-		screen: tabStack,
-		navigationOptions: ({ navigation }) => ({
-			header: () => {
-				return <Header navigation={navigation} listing="ListingInside" />
-			}
-		})
+		activeTintColor: 'rgb(255, 0, 0)'
 	}
 });
 
 const Navigator = createSwitchNavigator({
-	AuthStack,
+//	AuthStack,
 	AppStack
 });
 

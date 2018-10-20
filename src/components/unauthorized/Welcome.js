@@ -5,7 +5,6 @@ import {
 	Text,
 	StyleSheet,
 	Platform,
-	TextInput,
 	Image,
 	TouchableOpacity,
 	Dimensions
@@ -13,7 +12,7 @@ import {
 
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
-import Header from '../common/Header';
+import Listing from '../common/Listing';
 
 const { width } = Dimensions.get('window');
 
@@ -22,16 +21,32 @@ class Welcome extends Component {
 		super(props);
 
 		this.onLoginPress = this.onLoginPress.bind(this);
+		this.onSearchPressed = this.onSearchPressed.bind(this);
 	}
 
 	onLoginPress() {
 		this.props.navigation.navigate('Login');
 	}
 
+	onSearchPressed() {
+		this.props.navigation.navigate('Searching');
+	}
+
 	render() {
 		return (
 			<View style={styles.topContainer}>
-				<Header navigation={this.props.navigation} listing="ListingOutside" />
+				<View style={styles.topWrapper}>
+					<View style={styles.logoContainer}>
+						<Text style={styles.logoText}>Mako</Text>
+					</View>
+					<TouchableOpacity
+						style={styles.searchButton}
+						onPress={this.onSearchPressed}
+					>
+						<Ionicon name="ios-search" size={25} color="#000" style={styles.iconStyle} />
+						<Text style={styles.placeHolderText}>pilih lokasi "jakarta"</Text>
+					</TouchableOpacity>
+				</View>
 				<ScrollView style={styles.scrollWrapper}>
 					<View style={styles.cardSection}>
 						<Image
@@ -49,15 +64,7 @@ class Welcome extends Component {
 							Segera bergabung dan nikmati kemudahannya..
 						</Text>
 					</View>
-					<View style={styles.cardSection}>
-						<Text style={styles.boldText}>
-							Introducing New Apartment in Jakarta ...
-						</Text>
-						<Text />
-						<Text style={styles.boldText}>
-							... Best Location ...
-						</Text>
-					</View>
+					<Listing keyword="" />
 				</ScrollView>
 				<View style={styles.loginSection}>
 					<TouchableOpacity
@@ -82,11 +89,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#fff'
 	},
+	topWrapper: {
+		paddingTop: (Platform.OS === 'ios' ? 20 : 0),
+		paddingHorizontal: 15,
+		backgroundColor: '#fff'
+	},
 	logoContainer: {
 		marginTop: 10,
 		marginHorizontal: 10
 	},
-	inputContainer: {
+	searchButton: {
 		flexDirection: 'row',
 		borderWidth: 1,
 		borderColor: '#ddd',
@@ -98,10 +110,6 @@ const styles = StyleSheet.create({
 	iconStyle: {
 		paddingVertical: 5,
 		paddingRight: 10
-	},
-	input: {
-		flex: 1,
-		color: '#000'
 	},
 	separatorContainer: {
 		borderBottomWidth: 2,
@@ -142,7 +150,7 @@ const styles = StyleSheet.create({
 		color: '#000',
 		fontWeight: 'bold'
 	},
-	searchText: {
+	placeHolderText: {
 		color: '#989898'
 	},
 	buttonText: {

@@ -4,13 +4,24 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Image
+	Image,
+	Platform,
+	Dimensions
 } from 'react-native';
+
+const { width } = Dimensions.get('window');
 
 class Account extends Component {
 	render() {
 		return (
 			<ScrollView style={styles.topContainer}>
+				<View style={styles.logoContainer}>
+					<Text style={styles.logoText}>Mako</Text>
+				</View>
+				<Image
+					source={require('../../assets/images/image1.png')}
+					style={styles.campaignImage}
+				/>
 				<Image
 					source={require('../../assets/images/kisel.png')}
 					style={styles.coopImage}
@@ -82,7 +93,15 @@ class Account extends Component {
 const styles = StyleSheet.create({
 	topContainer: {
 		flex: 1,
-		backgroundColor: '#fff'
+		backgroundColor: '#fff',
+		paddingTop: (Platform.OS === 'ios' ? 20 : 0)
+	},
+	logoContainer: {
+		marginTop: 10,
+		marginHorizontal: 10
+	},
+	campaignImage: {
+		width
 	},
 	coopImage: {
 		marginVertical: 10,
@@ -113,6 +132,11 @@ const styles = StyleSheet.create({
 	commonText: {
 		color: '#000',
 		lineHeight: 25
+	},
+	logoText: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		color: '#FF0000'
 	}
 });
 
