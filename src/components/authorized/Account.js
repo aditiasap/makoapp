@@ -9,7 +9,11 @@ import {
 	Dimensions
 } from 'react-native';
 
-const { width } = Dimensions.get('window');
+import Carousel from 'react-native-looped-carousel';
+
+import { CarouselItem } from '../common/CarouselItem';
+
+const { width, height } = Dimensions.get('window');
 
 class Account extends Component {
 	render() {
@@ -18,10 +22,23 @@ class Account extends Component {
 				<View style={styles.logoContainer}>
 					<Text style={styles.logoText}>Mako</Text>
 				</View>
-				<Image
-					source={require('../../assets/images/image1.png')}
-					style={styles.campaignImage}
-				/>
+				<Carousel
+					style={styles.carouselStyle}
+					bullets
+					autoplay
+					delay={7000}
+					bulletStyle={styles.bulletCarouselStyle}
+					chosenBulletStyle={styles.bulletCarouselStyle}
+				>
+					<CarouselItem
+						source={require('../../assets/images/image1.png')}
+						style={styles.carouselStyle}
+					/>
+					<CarouselItem
+						source={require('../../assets/images/image2.png')}
+						style={styles.carouselStyle}
+					/>
+				</Carousel>
 				<Image
 					source={require('../../assets/images/kisel.png')}
 					style={styles.coopImage}
@@ -94,14 +111,11 @@ const styles = StyleSheet.create({
 	topContainer: {
 		flex: 1,
 		backgroundColor: '#fff',
-		paddingTop: (Platform.OS === 'ios' ? 20 : 0)
+		marginTop: (Platform.OS === 'ios' ? 20 : 0)
 	},
 	logoContainer: {
-		marginTop: 10,
-		marginHorizontal: 10
-	},
-	campaignImage: {
-		width
+		marginVertical: 10,
+		marginHorizontal: 25
 	},
 	coopImage: {
 		marginVertical: 10,
@@ -137,6 +151,13 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		fontWeight: 'bold',
 		color: '#FF0000'
+	},
+	carouselStyle: {
+		width: width,
+		height: height / 4
+	},
+	bulletCarouselStyle: {
+		marginBottom: 20
 	}
 });
 

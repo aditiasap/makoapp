@@ -36,9 +36,9 @@ const AuthStack = createStackNavigator({
 	}
 });
 
-const AccountStack = createStackNavigator({
-	Account: {
-		screen: Account,
+const BeliStack = createStackNavigator({
+	Beli: {
+		screen: Beli,
 		navigationOptions: {
 			header: null
 		}
@@ -53,21 +53,21 @@ const AccountStack = createStackNavigator({
 
 const AppStack = createBottomTabNavigator({
 	Account: { screen: Account },
+	Beli: { screen: BeliStack },
 	Transaksi: { screen: Transaksi },
-	Jual: { screen: Jual },
-	Beli: { screen: Beli }
+	Jual: { screen: Jual }
 }, {
 	navigationOptions: ({ navigation }) => ({
 		tabBarIcon: ({ focused, tintColor }) => {
 			const { routeName } = navigation.state;
 			if (routeName === 'Account') {
 				return <MaterialIcons name="account-circle" size={25} color={tintColor} />;
+			} else if (routeName === 'Beli') {
+				return <Entypo name="shopping-cart" size={25} color={tintColor} />;
 			} else if (routeName === 'Transaksi') {
 				return <FontAwesome name="handshake-o" size={25} color={tintColor} />;
 			} else if (routeName === 'Jual') {
 				return <Entypo name="shop" size={25} color={tintColor} />;
-			} else if (routeName === 'Beli') {
-				return <Entypo name="shopping-cart" size={25} color={tintColor} />;
 			}
 		},
 	}),
@@ -77,7 +77,7 @@ const AppStack = createBottomTabNavigator({
 });
 
 const Navigator = createSwitchNavigator({
-//	AuthStack,
+	AuthStack,
 	AppStack
 });
 
